@@ -51,7 +51,8 @@ function jfilipiak_starter_setup()
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__('Primary', 'jfilipiak_starter'),
+			'main_desktop' => esc_html__('main_desktop', 'jfilipiak_starter'),
+			'main_mobile' => esc_html__('main_mobile', 'jfilipiak_starter'),
 		)
 	);
 
@@ -138,21 +139,12 @@ function jfilipiak_starter_widgets_init()
 }
 add_action('widgets_init', 'jfilipiak_starter_widgets_init');
 
+
 /**
- * Enqueue scripts and styles.
+ * Scripts and styles
  */
-function jfilipiak_starter_scripts()
-{
-	wp_enqueue_style('jfilipiak_starter-style', get_stylesheet_uri(), array(), _S_VERSION);
+require get_template_directory() . '/inc/scripts.php';
 
-
-	wp_enqueue_script('jfilipiak_starter-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
-
-	if (is_singular() && comments_open() && get_option('thread_comments')) {
-		wp_enqueue_script('comment-reply');
-	}
-}
-add_action('wp_enqueue_scripts', 'jfilipiak_starter_scripts');
 
 /**
  * Implement the Custom Header feature.
